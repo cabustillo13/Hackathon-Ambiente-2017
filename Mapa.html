@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<!--INICIACIACION-->
+<h1>HACKATHON AMBIENTE 2017</h1>
+<p>Se presentan distintos puntos verdes para incentivar y guiar a los vecinos al reciclado en Mendoza, Argentina</p>
+
+<!--MOSTRAR GEOLOCALIZACION DETECTADA-->
+<div id="mapCanvas" style="width:1000px;height:400px;background:yellow"></div>
+
+<script>
+function myMap() {
+var mapOptions = {
+  // POR LAS DUDAS QUE QUIERA UTILIZAR ESTAS COORDENADAS DE LA CIUDAD DE MENDOZA MAS ADELANTE
+    <!--center: new google.maps.LatLng( -32.889459 , -68.845839),-->
+    zoom: 75,
+    mapTypeId: google.maps.MapTypeId.HYBRID
+}
+var map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+}
+</script>
+
+<!--Key para acceder a la api de Google Maps-->
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=MY_KEY_ID"></script>-->
+<script type='text/javascript' src='https://maps.googleapis.com/maps/api/js?key=MY_KEY_ID'></script>
+<!--Reemplazar MY_KEY_ID por la key obtenida en Google Apis-->
+
+<!--MOSTRAR MAPA POR PANTALLA-->
+<script>
+function initMap() {
+    var map;
+    var bounds = new google.maps.LatLngBounds();
+    var mapOptions = {
+        mapTypeId: 'roadmap'
+    };
+
+    // Mostrar mapa por pantalla
+    map = new google.maps.Map(document.getElementById("mapCanvas"), mapOptions);
+    map.setTilt(50);
+
+    // Contiene la ubicación georeferenciada y los nombres de los lugares donde se encuentran los puntos verdes de la Ciudad de Mendoza
+    // Multiple markers localizacion, latitud, y longitud
+     var markers = [
+       ['Plaza Independencia, CDM ', -32.88962735 , -68.84450145],
+       ['Parque Central, CDM', -32.87508461, -68.8421901572999],
+       ['CAM Barrio Cano, CDM', -32.87046717, -68.85878613],
+       ['Hospital Central, CDM', -32.89187849, -68.83309324],
+       ['Gimnasio Municipal #1, CDM', -32.8963039, -68.85881773],
+       ['Gimnasio Municipal #2, CDM', -32.8658974, -68.85335768],
+       ['Gimnasio Municipal #3, CDM', -32.875854, -68.8313652],
+       ['Gimnasio Municipal #4, CDM', -32.86620742, -68.86825791],
+       ['Unión Vecinal Barrio Sanidad, CDM', -32.86603923, -68.87524207],
+       ['Supermercado VEA, CDM', -32.86882821, -68.8563827],
+       ['Centro Cívico Barrio La Favorita, CDM', -32.8873842, -68.90359351],
+       ['Municipalidad de Ciudad de Mendoza, CDM', -32.8980492, -68.84289695],
+       ['Plazoleta Hugo A. Godoy, GC', -32.8852793, -68.85561204],
+       ['Plaza Irigoyen, GC', -32.86923824, -68.83887687],
+       ['Liceo Militar General Espejo, CDM', -32.8750352, -68.85932547],
+       ['Escuela San Luis Gonzaga, CDM', -32.89453639, -68.8415451],
+       ['Estacionamiento Supermercado VEA, CDM', -32.88230777, -68.84152703],
+       ['UTN, CDM', -32.89727201, -68.85344998],
+ ];
+
+ // Al darle click a cada marker va a mostrar informacion respecto a ese punto
+  var infoWindowContent = [
+     ['<div class="info_content">' +
+     '<h3>Plaza Independencia</h3>' +
+     '<p>En Ciudad de Mendoza</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Parque Central</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>CAM Barrio Cano</h3>' +
+     '<p>En Ciudad de Mendoza 2</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Hospital Central</h3>' +
+     '<p>En Ciudad de Mendoza</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Gimnasio Municipal #1</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Gimnasio Municipal #2</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Gimnasio Municipal #3</h3>' +
+     '<p>En Ciudad de Mendoza</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Gimnasio Municipal #4</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Unión Vecinal Barrio Sanidad</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Supermercado VEA</h3>' +
+     '<p>En Ciudad de Mendoza</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Centro Cívico Barrio La Favorita</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Municipalidad de Ciudad de Mendoza</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Plazoleta Hugo A. Godoy</h3>' +
+     '<p>En Godoy Cruz</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Plaza Irigoyen</h3>' +
+     '<p>En Godoy Cruz</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Liceo Militar General Espejo</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Escuela San Luis Gonzaga</h3>' +
+     '<p>En Ciudad de Mendoza</p>' + '</div>'],
+     ['<div class="info_content">' +
+     '<h3>Estacionamiento Supermercado VEA</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+     ['<div class="info_content">' +
+     '<h3>UTN</h3>' +
+     '<p>En Ciudad de Mendoza</p>' +
+     '</div>'],
+ ];
+
+    // Agregar todos los marcadores al mapa
+    var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+    // Ubicar cada marker en su respectiva posicion
+    for( i = 0; i < markers.length; i++ ) {
+        var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+        bounds.extend(position);
+        marker = new google.maps.Marker({
+            position: position,
+            map: map,
+            title: markers[i][0]
+        });
+
+        // Agregar a cada marcador informacion relevante
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+            return function() {
+                infoWindow.setContent(infoWindowContent[i][0]);
+                infoWindow.open(map, marker);
+            }
+        })(marker, i));
+
+        // Centrar el mapa para poder observar todos los markers dentro de la pantalla
+        map.fitBounds(bounds);
+    }
+
+    // Set nivel de zoom
+    var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+        this.setZoom(14);
+        google.maps.event.removeListener(boundsListener);
+    });
+
+}
+// Cargar iniciacion del mapa
+google.maps.event.addDomListener(window, 'load', initMap);
+</script>
+
+</body>
+</html>
