@@ -6,3 +6,7 @@ El Hackaton Ambiente fue una iniciativa impulsada por los ministerios nacionales
 Consistia en trabajar colaborativamente en la elaboración de proyectos innovadores sobre cuatro ejes temáticos: agua, biodiversidad, cambio climático y residuos.
 
 Se propuso presentar distintos puntos verdes para incentivar, informar y guiar a los vecinos al reciclado en Mendoza, Argentina. Así el vecino puede acceder al punto verde más cercano a él.
+
+## Resultado
+
+![Resultados](https://github.com/cabustillo13/Hackathon-Ambiente-2017/blob/master/Mapa%20con%20info%20de%20markers.png)
